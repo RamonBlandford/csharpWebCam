@@ -14,9 +14,38 @@ namespace Demo
 {
     public partial class MainForm : Form
     {
+        private Timer _timer = new Timer();
+
+
         public MainForm()
         {
             InitializeComponent();
+
+            _timer.Tick += TimerOnTick;
+            _timer.Interval = 500;
+            _timer.Start();
+        }
+
+        private void TimerOnTick(object sender, EventArgs e)
+        {
+            _timer.Stop();
+
+            if (_frameSource != null)
+            {
+                Bitmap current = (Bitmap) _latestFrame.Clone();
+
+                Recognizer recognizer = new Recognizer();
+                var result = recognizer.Decode(current);
+
+                if (result != null)
+                {
+                    LabelBarcodeRead.Text = result.Text;
+                }
+
+            }
+
+
+            _timer.Start();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -69,8 +98,8 @@ namespace Demo
             {
                 Camera c = (Camera)comboBoxCameras.SelectedItem;
                 setFrameSource(new CameraFrameSource(c));
-                _frameSource.Camera.CaptureWidth = 640;
-                _frameSource.Camera.CaptureHeight = 480;
+                _frameSource.Camera.CaptureWidth = 1280;    //640;
+                _frameSource.Camera.CaptureHeight = 720;    //480;
                 _frameSource.Camera.Fps = 50;
                 _frameSource.NewFrame += OnImageCaptured;
 
@@ -129,6 +158,10 @@ namespace Demo
                 return;
 
             Bitmap current = (Bitmap)_latestFrame.Clone();
+
+            Recognizer recognizer = new Recognizer();
+            recognizer.Decode(current);
+
             using (SaveFileDialog sfd = new SaveFileDialog())
             {
                 sfd.Filter = "*.png|*.png";
