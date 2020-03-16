@@ -43,6 +43,7 @@
             this.cameraPropertyValueValue = new System.Windows.Forms.NumericUpDown();
             this.cameraPropertyValueAuto = new System.Windows.Forms.CheckBox();
             this.LabelBarcodeRead = new System.Windows.Forms.Label();
+            this.btn_pickFile = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDisplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cameraPropertyValueValue)).BeginInit();
             this.SuspendLayout();
@@ -50,7 +51,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(517, 397);
+            this.btnSave.Location = new System.Drawing.Point(725, 710);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(87, 23);
             this.btnSave.TabIndex = 14;
@@ -60,12 +61,10 @@
             // 
             // pictureBoxDisplay
             // 
-            this.pictureBoxDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBoxDisplay.Location = new System.Drawing.Point(12, 12);
+            this.pictureBoxDisplay.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBoxDisplay.Location = new System.Drawing.Point(26, 12);
             this.pictureBoxDisplay.Name = "pictureBoxDisplay";
-            this.pictureBoxDisplay.Size = new System.Drawing.Size(684, 379);
+            this.pictureBoxDisplay.Size = new System.Drawing.Size(855, 665);
             this.pictureBoxDisplay.TabIndex = 13;
             this.pictureBoxDisplay.TabStop = false;
             // 
@@ -74,7 +73,7 @@
             this.comboBoxCameras.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.comboBoxCameras.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCameras.FormattingEnabled = true;
-            this.comboBoxCameras.Location = new System.Drawing.Point(186, 397);
+            this.comboBoxCameras.Location = new System.Drawing.Point(186, 710);
             this.comboBoxCameras.Name = "comboBoxCameras";
             this.comboBoxCameras.Size = new System.Drawing.Size(153, 21);
             this.comboBoxCameras.TabIndex = 12;
@@ -82,7 +81,7 @@
             // btnConfig
             // 
             this.btnConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConfig.Location = new System.Drawing.Point(610, 397);
+            this.btnConfig.Location = new System.Drawing.Point(818, 710);
             this.btnConfig.Name = "btnConfig";
             this.btnConfig.Size = new System.Drawing.Size(87, 23);
             this.btnConfig.TabIndex = 10;
@@ -93,7 +92,7 @@
             // btnStop
             // 
             this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnStop.Location = new System.Drawing.Point(94, 397);
+            this.btnStop.Location = new System.Drawing.Point(94, 710);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(75, 23);
             this.btnStop.TabIndex = 9;
@@ -104,7 +103,7 @@
             // btnStart
             // 
             this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnStart.Location = new System.Drawing.Point(13, 397);
+            this.btnStart.Location = new System.Drawing.Point(13, 710);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 8;
@@ -116,7 +115,7 @@
             // 
             this.cameraPropertyValue.Enabled = false;
             this.cameraPropertyValue.FormattingEnabled = true;
-            this.cameraPropertyValue.Location = new System.Drawing.Point(65, 424);
+            this.cameraPropertyValue.Location = new System.Drawing.Point(64, 683);
             this.cameraPropertyValue.Name = "cameraPropertyValue";
             this.cameraPropertyValue.Size = new System.Drawing.Size(156, 21);
             this.cameraPropertyValue.TabIndex = 15;
@@ -126,7 +125,7 @@
             // cameraPropertyTitle
             // 
             this.cameraPropertyTitle.AutoSize = true;
-            this.cameraPropertyTitle.Location = new System.Drawing.Point(13, 427);
+            this.cameraPropertyTitle.Location = new System.Drawing.Point(12, 686);
             this.cameraPropertyTitle.Name = "cameraPropertyTitle";
             this.cameraPropertyTitle.Size = new System.Drawing.Size(52, 15);
             this.cameraPropertyTitle.TabIndex = 16;
@@ -135,7 +134,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(418, 427);
+            this.label1.Location = new System.Drawing.Point(419, 686);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 15);
             this.label1.TabIndex = 17;
@@ -144,7 +143,7 @@
             // cameraPropertyRangeTitle
             // 
             this.cameraPropertyRangeTitle.AutoSize = true;
-            this.cameraPropertyRangeTitle.Location = new System.Drawing.Point(300, 427);
+            this.cameraPropertyRangeTitle.Location = new System.Drawing.Point(301, 686);
             this.cameraPropertyRangeTitle.Name = "cameraPropertyRangeTitle";
             this.cameraPropertyRangeTitle.Size = new System.Drawing.Size(44, 15);
             this.cameraPropertyRangeTitle.TabIndex = 18;
@@ -153,7 +152,7 @@
             // cameraPropertyRangeValue
             // 
             this.cameraPropertyRangeValue.AutoSize = true;
-            this.cameraPropertyRangeValue.Location = new System.Drawing.Point(345, 427);
+            this.cameraPropertyRangeValue.Location = new System.Drawing.Point(346, 686);
             this.cameraPropertyRangeValue.Name = "cameraPropertyRangeValue";
             this.cameraPropertyRangeValue.Size = new System.Drawing.Size(50, 15);
             this.cameraPropertyRangeValue.TabIndex = 19;
@@ -166,7 +165,7 @@
             this.cameraPropertyValueTypeSelection.Items.AddRange(new object[] {
             "Value",
             "Percentage"});
-            this.cameraPropertyValueTypeSelection.Location = new System.Drawing.Point(458, 424);
+            this.cameraPropertyValueTypeSelection.Location = new System.Drawing.Point(459, 683);
             this.cameraPropertyValueTypeSelection.Name = "cameraPropertyValueTypeSelection";
             this.cameraPropertyValueTypeSelection.Size = new System.Drawing.Size(55, 21);
             this.cameraPropertyValueTypeSelection.TabIndex = 20;
@@ -175,7 +174,7 @@
             // cameraPropertyValueValue
             // 
             this.cameraPropertyValueValue.Enabled = false;
-            this.cameraPropertyValueValue.Location = new System.Drawing.Point(519, 425);
+            this.cameraPropertyValueValue.Location = new System.Drawing.Point(520, 684);
             this.cameraPropertyValueValue.Name = "cameraPropertyValueValue";
             this.cameraPropertyValueValue.Size = new System.Drawing.Size(61, 20);
             this.cameraPropertyValueValue.TabIndex = 21;
@@ -186,7 +185,7 @@
             // 
             this.cameraPropertyValueAuto.AutoSize = true;
             this.cameraPropertyValueAuto.Enabled = false;
-            this.cameraPropertyValueAuto.Location = new System.Drawing.Point(586, 426);
+            this.cameraPropertyValueAuto.Location = new System.Drawing.Point(587, 685);
             this.cameraPropertyValueAuto.Name = "cameraPropertyValueAuto";
             this.cameraPropertyValueAuto.Size = new System.Drawing.Size(60, 19);
             this.cameraPropertyValueAuto.TabIndex = 22;
@@ -198,17 +197,28 @@
             // 
             this.LabelBarcodeRead.AutoSize = true;
             this.LabelBarcodeRead.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelBarcodeRead.Location = new System.Drawing.Point(13, 484);
+            this.LabelBarcodeRead.Location = new System.Drawing.Point(8, 756);
             this.LabelBarcodeRead.Name = "LabelBarcodeRead";
             this.LabelBarcodeRead.Size = new System.Drawing.Size(29, 29);
             this.LabelBarcodeRead.TabIndex = 23;
             this.LabelBarcodeRead.Text = "--";
             // 
+            // btn_pickFile
+            // 
+            this.btn_pickFile.Location = new System.Drawing.Point(13, 788);
+            this.btn_pickFile.Name = "btn_pickFile";
+            this.btn_pickFile.Size = new System.Drawing.Size(75, 23);
+            this.btn_pickFile.TabIndex = 24;
+            this.btn_pickFile.Text = "Pick File";
+            this.btn_pickFile.UseVisualStyleBackColor = true;
+            this.btn_pickFile.Click += new System.EventHandler(this.btn_pickFile_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(708, 590);
+            this.ClientSize = new System.Drawing.Size(916, 903);
+            this.Controls.Add(this.btn_pickFile);
             this.Controls.Add(this.LabelBarcodeRead);
             this.Controls.Add(this.cameraPropertyValueAuto);
             this.Controls.Add(this.cameraPropertyValueValue);
@@ -253,6 +263,7 @@
         private System.Windows.Forms.NumericUpDown cameraPropertyValueValue;
         private System.Windows.Forms.CheckBox cameraPropertyValueAuto;
         private System.Windows.Forms.Label LabelBarcodeRead;
+        private System.Windows.Forms.Button btn_pickFile;
     }
 }
 

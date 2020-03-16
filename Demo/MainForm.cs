@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ using System.Windows.Forms;
 using Touchless.Vision.Camera;
 
 using System.Drawing.Imaging;
+using IronBarCode;
 
 namespace Demo
 {
@@ -28,24 +30,7 @@ namespace Demo
 
         private void TimerOnTick(object sender, EventArgs e)
         {
-            _timer.Stop();
 
-            if (_frameSource != null)
-            {
-                Bitmap current = (Bitmap) _latestFrame.Clone();
-
-                Recognizer recognizer = new Recognizer();
-                var result = recognizer.Decode(current);
-
-                if (result != null)
-                {
-                    LabelBarcodeRead.Text = result.Text;
-                }
-
-            }
-
-
-            _timer.Start();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -118,7 +103,28 @@ namespace Demo
             if (_latestFrame != null)
             {
                 // Draw the latest image from the active camera
-                e.Graphics.DrawImage(_latestFrame, 0, 0, _latestFrame.Width, _latestFrame.Height);
+                fillPictureBox(pictureBoxDisplay, _latestFrame);
+
+
+                Bitmap current = (Bitmap)_latestFrame.Clone();
+
+                var sw = Stopwatch.StartNew();
+
+                BarcodeResult[] ironResults = BarcodeReader.ReadAllBarcodes(current, BarcodeEncoding.QRCode);
+                if (ironResults.Length > 0)
+                {
+                    Console.Beep(5000, 1000);
+                    foreach (var ironResult in ironResults)
+                    {
+                        LabelBarcodeRead.Text = ironResult.Text + ", ";
+                    }
+                }
+                else
+                {
+                    LabelBarcodeRead.Text = "Nothing found " + DateTime.Now.ToShortTimeString();
+                }
+
+                Console.WriteLine(sw.ElapsedMilliseconds);
             }
         }
 
@@ -448,5 +454,77 @@ namespace Demo
               InitializeCameraPropertyControls();
         }
         #endregion
+
+        private void btn_pickFile_Click(object sender, EventArgs e)
+        {
+            btnStop_Click(this, null);
+
+            pictureBoxDisplay.Paint += new PaintEventHandler(drawLatestImage);
+
+            OpenFileDialog fdlg = new OpenFileDialog();
+            fdlg.Title = "Open File";
+            //fdlg.InitialDirectory = @"c:\";
+            fdlg.Filter = "All files (*.*)|*.*|All files (*.*)|*.*";
+            fdlg.FilterIndex = 2;
+            fdlg.RestoreDirectory = true;
+            
+            if (fdlg.ShowDialog() == DialogResult.OK)
+            {
+                var read = new Bitmap(fdlg.FileName);
+                _latestFrame = (Bitmap) read.Clone();
+
+                var sw = Stopwatch.StartNew();
+                BarcodeResult[] ironResults = IronBarCode.BarcodeReader.ReadAllBarcodes(read, BarcodeEncoding.QRCode);
+                
+
+                if( ironResults.Length > 0)
+                {
+                    foreach (var ironResult in ironResults)
+                    {
+                        LabelBarcodeRead.Text = ironResult.Text + ", ";
+                    }
+                }
+                else
+                {
+                    LabelBarcodeRead.Text = "Nothing found " + DateTime.Now.ToString("HH:mm:ss");
+                }
+
+                Console.WriteLine(sw.ElapsedMilliseconds);
+
+                pictureBoxDisplay.Refresh();
+
+            }
+
+            pictureBoxDisplay.Paint -= new PaintEventHandler(drawLatestImage);
+        }
+
+        static public void fillPictureBox(PictureBox pbox, Bitmap bmp)
+        {
+            pbox.SizeMode = PictureBoxSizeMode.StretchImage;
+            bool source_is_wider = (float)bmp.Width / bmp.Height > (float)pbox.Width / pbox.Height;
+
+            Bitmap resized = new Bitmap(pbox.Width, pbox.Height);
+            Graphics g = Graphics.FromImage(resized);
+            Rectangle dest_rect = new Rectangle(0, 0, pbox.Width, pbox.Height);
+            Rectangle src_rect;
+
+            if (source_is_wider)
+            {
+                float size_ratio = (float)pbox.Height / bmp.Height;
+                int sample_width = (int)(pbox.Width / size_ratio);
+                src_rect = new Rectangle((bmp.Width - sample_width) / 2, 0, sample_width, bmp.Height);
+            }
+            else
+            {
+                float size_ratio = (float)pbox.Width / bmp.Width;
+                int sample_height = (int)(pbox.Height / size_ratio);
+                src_rect = new Rectangle(0, (bmp.Height - sample_height) / 2, bmp.Width, sample_height);
+            }
+
+            g.DrawImage(bmp, dest_rect, src_rect, GraphicsUnit.Pixel);
+            g.Dispose();
+
+            pbox.Image = resized;
+        }
     }
 }
